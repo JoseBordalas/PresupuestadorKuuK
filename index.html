@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Presupuestador</title>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        
+        
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .btQuoteBookingForm {
+            background: white;
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            font-weight: 700;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label.section-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: block;
+        }
+        select, input[type="text"], input[type="number"], input[type="email"], input[type=textarea] {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            margin-top: 5px;
+        }
+        .hidden { display: none; }
+        button {
+            background-color: #4b4b4b;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #resumen {
+            background: #f4f7fa;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+        .btQuoteTotal {
+            background: linear-gradient(135deg, #505050, #797979);
+            color: white;
+            padding: 20px 25px;
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btQuoteTotal span {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .forma-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.forma-options label {
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+
+.forma-options input[type="radio"] {
+  display: none;
+}
+
+.forma-options img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  transition: border 0.2s, transform 0.2s;
+}
+
+.forma-options input[type="radio"]:checked + img {
+  border: 3px solid #424242;
+  transform: scale(1.05);
+}
+
+    </style>
+</head>
+<body>
+  <div class="btQuoteBookingForm">
+    <h2>Presupuestador</h2>
+    <div id="logoEspacio" style="text-align: center; margin-bottom: 20px;">
+    <!-- Aquí puedes insertar un logo más adelante -->
+     <img style="height: 200px; " src="https://kuukencimeras.com/wp-content/uploads/2021/03/AF-logo-kuuk-PBLACK2C.jpg"></img>
+    <!-- <img src="ruta-a-tu-logo.png" alt="Logo" style="max-height: 80px;"> -->
+     <p style="font-size: 15px;">Este es un presupuesto estimado. El precio final puede variar según las características específicas del proyecto, cambios solicitados o condiciones adicionales no contempladas en esta estimación.</p>
+</div>
+
+<form id="formulario">
+        <label for="tipo" class="section-title">Tipo de producto:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="" disabled selected hidden>Seleccione...</option>
+            <option value="cocina">Encimera de cocina</option>
+            <option value="bano">Encimera de baño</option>
+            <option value="estanteria">Estantería</option>
+        </select>
+
+        <div id="divForma" class="hidden">
+  <label class="section-title">Forma:</label>
+  <div class="forma-options">
+    <label>
+      <input type="radio" name="forma" value="lineal" required>
+      <img src="https://www.chimeneasinmacon.com/wp-content/uploads/2017/06/linea.jpg" alt="Lineal" title="Lineal">
+    </label>
+    <label>
+      <input type="radio" name="forma" value="l">
+      <img src="https://www.chimeneasinmacon.com/wp-content/uploads/2017/06/en-l.jpg" alt="En forma de L" title="En forma de L">
+    </label>
+    <label>
+      <input type="radio" name="forma" value="u">
+      <img src="https://www.chimeneasinmacon.com/wp-content/uploads/2017/06/en-u.jpg" alt="En forma de U" title="En forma de U">
+    </label>
+    <label>
+      <input type="radio" name="forma" value="isla">
+      <img src="https://www.chimeneasinmacon.com/wp-content/uploads/2017/06/isla.jpg" alt="Isla" title="Isla">
+    </label>
+    <label>
+      <input type="radio" name="forma" value="redonda">
+      <img src="https://tusmesasysillas.com/10731-thickbox_default/encimera-mesa-madera-redonda.jpg" alt="Redonda" title="Redonda">
+    </label>
+    <label>
+      <input type="radio" name="forma" value="cubos">
+      <img src="https://static.islas.ikea.es/assets/images/091/0709159_PE726843_S4.webp" alt="Cubos" title="Cubos">
+    </label>
+  </div>
+</div>
+
+        <div id="divMaterial" class="hidden">
+            <label for="material" class="section-title">Material:</label>
+            <select id="material" name="material" required>
+                <option value="">Seleccione...</option>
+            </select>
+        </div>
+
+        <div id="divGrosor" class="hidden">
+            <label for="grosor" class="section-title">Grosor:</label>
+            <select id="grosor" name="grosor" required>
+                <option value="">Seleccione...</option>
+            </select>
+        </div>
+
+        <div id="divCaras" class="hidden">
+            <label for="caras" class="section-title">Caras:</label>
+            <select id="caras" name="caras" required>
+                <option value="">Seleccione...</option>
+                <option value="1">1 cara</option>
+                <option value="2">2 caras</option>
+            </select>
+        </div>
+        <div id="divCarasFijo" class="hidden">
+            <label class="section-title">Caras:</label>
+            <input type="text" value="2 caras" disabled>
+        </div>
+
+        <div id="divColor" class="hidden">
+            <label for="color" class="section-title">Color:</label>
+            <select id="color" name="color" required>
+                <option value="">Seleccione...</option>
+            </select>
+            <img id="imagenColor" src="" alt="Imagen del color" style="margin-top: 10px; width: 300px; display: none; border-radius: 5%; max-height: 250px;">
+
+        </div>
+
+        <div id="divMedidas" class="hidden">
+            <label class="section-title">Medidas de las piezas:</label>
+            <div id="medidasCampos"></div>
+        </div>
+
+        <div id="divEnsambles" class="hidden">
+            <label class="section-title">Tipo de ensamble:</label>
+            <div id="ensamblesOpciones"></div>
+        </div>
+
+        <div id="divTrabajos" class="hidden">
+            <label class="section-title">Trabajos a realizar:</label>
+            <div id="trabajosOpciones"></div>
+        </div>
+
+        <div id="divEncastres" class="hidden">
+            <label class="section-title">Encastres:</label>
+            <div id="encastresOpciones"></div>
+        </div>
+
+        <div id="divComplementos" class="hidden">
+            <label class="section-title">Complementos:</label>
+            <div id="complementosOpciones"></div>
+        </div>
+
+        <button type="button" class="btn-azul" id="btnResumen" style="display:none;">Resumen</button>
+        <button type="submit" class="btn-verde" id="btnEnviar" style="display:none;">Enviar</button>
+<div id="resumen" class="hidden" style="margin-top: 30px; padding: 20px; background-color: #e8f0fe; border-radius: 10px; border: 1px solid #ccc;"></div>
+    </form>
+
+    <div class="btQuoteTotal">
+      Presupuesto Total: <span id="total">0 €</span>
+    </div>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+        // --- DATOS Y OPCIONES ---
+       const colores = {
+   'HPL_20_1': ['ROSA SHADE',
+'GOLDEN MOON CLIMB',
+'PULPIS GREY',
+'PULPIS LIGHT',
+'MARMO ELITE',
+'UMA',
+'ROVERE SLAVONIA',
+'NOCE SINFONIA',
+'ROVERE VALDWEG',
+'BIANCO ALASKA',
+'BIANCO KOS',
+'NERO INGO',
+'VERDE COMODORO',
+'GRIGIO ANTRIM',
+'ROBLE HALIFAX NATURAL ST37',
+'ROBLE HALIFAX TABACO ST37',
+'ROBLE HUNTON CLARO',
+'POLAR WHITE VITA',
+'CALACATA',
+'PIETRA GRAFITE VITA',
+'VENETO MARBLE',
+'FERRO GRAFITE',
+'NERO GRAFITE VITA',
+'BLANCK ARTIC',
+'WALNUT BLOCK',
+'BASALT SLATE AHD',
+'ICE QUARSTONE',
+'BRUSHED CONCRETE',
+'CARRARA',
+'ELEMENTAL CONCRETE',
+'ELEMENTAL CORTEN',
+'RURAL OAK',
+'ALABASTER OAK',
+'WIDE PLANKED WALNUT',
+'SALVAGE PLANKED',
+'FERRO GRAFITE',
+'OXIDIZED',
+'NERO GRAFITE ARD',
+'PLANKED HAVAN OAK',
+'HIGHLAND PINE PGN'],
+  'HPL_20_2': ['POLAR WHITE VITA',
+'PIETRA GRAFITE VITA',
+'VENETO MARBLE',
+'FERRO GRAFITE',
+'NERO GRAFITE VITA',
+'BLANCK ARTIC',
+'WALNUT BLOCK',
+'CALACATA',
+'BASALT SLATE AHD',
+'ICE QUARSTONE',
+'BRUSHED CONCRETE',
+'CARRARA',
+'ELEMENTAL CONCRETE',
+'ELEMENTAL CORTEN',
+'RURAL OAK',
+'ALABASTER OAK',
+'WIDE PLANKED WALNUT',
+'SALVAGE PLANKED',
+'FERRO GRAFITE',
+'OXIDIZED',
+'NERO GRAFITE ARD',
+'PLANKED HAVAN OAK',
+'HIGHLAND PINE PGN'],
+  'HPL_40_1': ['POLAR WHITE VITA',
+'PIETRA GRAFITE VITA',
+'VENETO MARBLE',
+'FERRO GRAFITE',
+'NERO GRAFITE VITA',
+'BLANCK ARTIC',
+'WALNUT BLOCK',
+'CALACATA',
+'BASALT SLATE AHD',
+'ICE QUARSTONE',
+'BRUSHED CONCRETE',
+'CARRARA',
+'ELEMENTAL CONCRETE',
+'ELEMENTAL CORTEN',
+'RURAL OAK',
+'ALABASTER OAK',
+'WIDE PLANKED WALNUT',
+'SALVAGE PLANKED',
+'FERRO GRAFITE',
+'OXIDIZED',
+'NERO GRAFITE ARD',
+'PLANKED HAVAN OAK',
+'HIGHLAND PINE PGN'],
+  'HPL_40_2': ['POLAR WHITE VITA',
+'PIETRA GRAFITE VITA',
+'VENETO MARBLE',
+'FERRO GRAFITE',
+'NERO GRAFITE VITA',
+'BLANCK ARTIC',
+'WALNUT BLOCK',
+'CALACATA',
+'BASALT SLATE AHD',
+'ICE QUARSTONE',
+'BRUSHED CONCRETE',
+'CARRARA',
+'ELEMENTAL CONCRETE',
+'ELEMENTAL CORTEN',
+'RURAL OAK',
+'ALABASTER OAK',
+'WIDE PLANKED WALNUT',
+'SALVAGE PLANKED',
+'FERRO GRAFITE',
+'OXIDIZED',
+'NERO GRAFITE ARD',
+'PLANKED HAVAN OAK',
+'HIGHLAND PINE PGN'],
+  'HPL_60_1': ['POLAR WHITE VITA',
+'PIETRA GRAFITE VITA',
+'VENETO MARBLE',
+'FERRO GRAFITE',
+'NERO GRAFITE VITA',
+'BLANCK ARTIC',
+'WALNUT BLOCK',
+'CALACATA',
+'BASALT SLATE AHD',
+'ICE QUARSTONE',
+'BRUSHED CONCRETE',
+'CARRARA',
+'ELEMENTAL CONCRETE',
+'ELEMENTAL CORTEN',
+'RURAL OAK',
+'ALABASTER OAK',
+'WIDE PLANKED WALNUT',
+'SALVAGE PLANKED',
+'FERRO GRAFITE',
+'OXIDIZED',
+'NERO GRAFITE ARD',
+'PLANKED HAVAN OAK',
+'HIGHLAND PINE PGN'],
+  'HPL_60_2': ['POLAR WHITE VITA',
+'PIETRA GRAFITE VITA',
+'VENETO MARBLE',
+'FERRO GRAFITE',
+'NERO GRAFITE VITA',
+'BLANCK ARTIC',
+'WALNUT BLOCK',
+'CALACATA',
+'BASALT SLATE AHD',
+'ICE QUARSTONE',
+'BRUSHED CONCRETE',
+'CARRARA',
+'ELEMENTAL CONCRETE',
+'ELEMENTAL CORTEN',
+'RURAL OAK',
+'ALABASTER OAK',
+'WIDE PLANKED WALNUT',
+'SALVAGE PLANKED',
+'FERRO GRAFITE',
+'OXIDIZED',
+'NERO GRAFITE ARD',
+'PLANKED HAVAN OAK',
+'HIGHLAND PINE PGN'],
+  'Compacto_12_2': [
+    'BIANCO KOS',
+    'NERO',
+    'NERO INGO',
+    'GOLDEN MOON CLIMB',
+    'PULPIS GREY',
+    'PULPIS LIGHT',
+    'WALNUT BLOCK',
+    'POLAR WHITE VITA',
+    'CALACATA',
+    'VENETO MARBLE',
+    'NERO GRAFITE VITA',
+    'CRYSTAL WHITE',
+    'CALACATA',
+    'BASALT SLATE AHD',
+    'ELEMENTAL CONCRETE',
+    'ELEMENTAL CORTEN',
+    'RURAL OAK',
+    'WIDE PLANKED WALNUT',
+    'OXIDIZED',
+    'NERO GRAFITE VITA',
+    'BLANCK ARTIC',
+    'MARBRE ALCINO'
+  ]
+};
+
+        
+const precios = {
+    materiales: {
+        HPL: {
+            '20_1': 310,
+            '20_2': 400,
+            '40_1': 400,
+            '40_2': 520,
+            '60_1': 750,
+            '60_2': 800
+        },
+        Compacto: 'color_dependiente',
+        Melamina: 40
+    },
+    complementos: {
+        HPL: { Copete: 170, Led: 400 },
+        Compacto: { Copete: 200, Led: 400 }
+    },
+    ensambles: {
+        "Unión recta": 90,
+        "Unión ingletada": 130,
+        "Emboquillado": 90,
+        "Unión1": 90,
+        "Unión2": 90
+    },
+    trabajos: {
+        "Corte redondo interior": 90,
+        "Corte redondo 1 lado": 90,
+        "Corte redondo 2 lados": 180,
+        "Corte redondo 4 lados": 360,
+        "Corte chaflán": 90,
+        "Corte falsa escuadra": 90,
+        "Corte chaflán interno": 90,
+        "Pulido": 90,
+        "Canteado": 90,
+        "Faldón ingletado": 90,
+        "Trabajo 1": 90,
+        "Trabajo 2": 90
+    },
+    encastres: {
+        "Fregadero BE": 280,
+        "Fregadero RAS": 280,
+        "Fregadero": 70,
+        "Placa": 70,
+        "Otros": 70
+    }
+};
+
+
+        const materialesPorTipo = {
+            cocina: ['HPL', 'Compacto'],
+            bano: ['HPL', 'Compacto'],
+            estanteria: ['HPL', 'Melamina']
+        };
+
+        const grosoresPorMaterial = {
+            HPL: ['10', '20', '40', '60'],
+            Compacto: ['12'],
+            Melamina: ['10', '19']
+        };
+
+        const ensamblesPorMaterial = {
+            HPL: ['Unión recta', 'Unión ingletada', 'Emboquillado'],
+            Compacto: ['Unión recta', 'Unión ingletada'],
+            Melamina: ['Unión1', 'Unión2']
+        };
+
+        const trabajosPorMaterial = {
+            HPL: [
+                'Corte redondo interior',
+                'Corte redondo 1 lado',
+                'Corte redondo 2 lados',
+                'Corte redondo 4 lados',
+                'Corte chaflán',
+                'Corte falsa escuadra',
+                'Corte chaflán interno',
+                'Faldón ingletado'
+            ],
+            Compacto: [
+                'Corte redondo interior',
+                'Corte redondo 1 lado',
+                'Corte redondo 2 lados',
+                'Corte redondo 4 lados',
+                'Corte chaflán',
+                'Corte falsa escuadra',
+                'Corte chaflán interno',
+                'Pulido',
+                'Canteado',
+                'Faldón ingletado'
+            ],
+            Melamina: [
+                'Trabajo 1',
+                'Trabajo 2'
+            ]
+        };
+
+        const encastresPorMaterial = {
+            HPL: ['Fregadero BE', 'Fregadero RAS', 'Placa', 'Otros'],
+            Compacto: ['Fregadero', 'Placa', 'Otros'],
+            Melamina: []
+        };
+
+        const complementosPorMaterial = {
+            HPL: ['Copete', 'Aplacado', 'Led', 'Pata Tapa'],
+            Compacto: ['Copete', 'Aplacado', 'Led'],
+            Melamina: []
+        };
+
+        // --- ELEMENTOS DOM ---
+        const tipo = document.getElementById('tipo');
+        const forma = document.getElementById('forma');
+        const material = document.getElementById('material');
+        const grosor = document.getElementById('grosor');
+        const caras = document.getElementById('caras');
+        const divCaras = document.getElementById('divCaras');
+        const divCarasFijo = document.getElementById('divCarasFijo');
+        const color = document.getElementById('color');
+        const trabajosOpciones = document.getElementById('trabajosOpciones');
+        const divForma = document.getElementById('divForma');
+        const divMaterial = document.getElementById('divMaterial');
+        const divGrosor = document.getElementById('divGrosor');
+        const divColor = document.getElementById('divColor');
+        const divEnsambles = document.getElementById('divEnsambles');
+        const divTrabajos = document.getElementById('divTrabajos');
+        const divEncastres = document.getElementById('divEncastres');
+        const divComplementos = document.getElementById('divComplementos');
+        const divMedidas = document.getElementById('divMedidas');
+        const medidasCampos = document.getElementById('medidasCampos');
+        const btnResumen = document.getElementById('btnResumen');
+        const btnEnviar = document.getElementById('btnEnviar');
+        const resumen = document.getElementById('resumen');
+        const mensajeEnviado = document.getElementById('mensajeEnviado');
+        const ensamblesOpciones = document.getElementById('ensamblesOpciones');
+        const encastresOpciones = document.getElementById('encastresOpciones');
+        const complementosOpciones = document.getElementById('complementosOpciones');
+        // --- LISTENERS para imágenes de forma ---
+document.querySelectorAll('input[name="forma"]').forEach((radio) => {
+    radio.addEventListener('change', function () {
+        hideFrom('material');
+        if (this.value) {
+            actualizarMaterial();
+            divMaterial.classList.remove('hidden');
+        } else {
+            divMaterial.classList.add('hidden');
+        }
+    });
+});
+
+function mostrarFormas(valores) {
+    document.querySelectorAll('#divForma input[name="forma"]').forEach(radio => {
+        const label = radio.closest('label');
+        if (valores.includes(radio.value)) {
+            label.style.display = 'inline-block';
+            radio.required = true;
+        } else {
+            label.style.display = 'none';
+            radio.required = false;
+            radio.checked = false;
+        }
+    });
+}
+
+        // --- FLUJO Y LISTENERS ---
+        tipo.addEventListener('change', function() {
+            if (tipo.value) {
+                divForma.classList.remove('hidden');
+                actualizarFormas();
+            } else {
+                divForma.classList.add('hidden');
+                hideFrom('forma');
+            }
+        });
+
+        tipo.addEventListener('change', function() {
+    if (tipo.value) {
+        divForma.classList.remove('hidden');
+
+        if (tipo.value === 'estanteria') {
+            mostrarFormas(['cubos']);
+        } else {
+            mostrarFormas(['lineal', 'l', 'u', 'isla', 'redonda']);
+        }
+    } else {
+        divForma.classList.add('hidden');
+        hideFrom('forma');
+    }
+});
+
+
+        material.addEventListener('change', function() {
+            hideFrom('grosor');
+            if (material.value) {
+                actualizarGrosor();
+                divGrosor.classList.remove('hidden');
+            } else {
+                divGrosor.classList.add('hidden');
+            }
+        });
+
+        grosor.addEventListener('change', function() {
+            hideFrom('caras');
+            if (grosor.value) {
+                actualizarCaras();
+                if (material.value === 'Compacto' || material.value === 'Melamina') {
+                    actualizarColor();
+                }
+            } else {
+                divCaras.classList.add('hidden');
+                divCarasFijo.classList.add('hidden');
+            }
+        });
+
+        caras.addEventListener('change', function() {
+            hideFrom('color');
+            if (caras.value) {
+                actualizarColor();
+                divColor.classList.remove('hidden');
+            } else {
+                divColor.classList.add('hidden');
+            }
+        });
+
+        color.addEventListener('change', function() {
+            hideFrom('medidas');
+            if (color.value) {
+                actualizarMedidas();
+                divMedidas.classList.remove('hidden');
+            } else {
+                divMedidas.classList.add('hidden');
+            }
+        });
+
+        // --- FUNCIONES DE ACTUALIZACIÓN ---
+        function actualizarFormas() {
+            forma.innerHTML = '<option value="">Seleccione...</option>';
+            let opciones = ['lineal', 'l', 'u', 'isla', 'redonda'];
+            if (tipo.value === 'estanteria') {
+                opciones = ['cubos'];
+            }
+            opciones.forEach(opcion => {
+                let opt = document.createElement('option');
+                opt.value = opcion;
+                opt.textContent = opcion.charAt(0).toUpperCase() + opcion.slice(1);
+                forma.appendChild(opt);
+            });
+        }
+
+        function actualizarMaterial() {
+            material.innerHTML = '<option value="">Seleccione...</option>';
+            let opciones = materialesPorTipo[tipo.value];
+            opciones.forEach(mat => {
+                let opt = document.createElement('option');
+                opt.value = mat;
+                opt.textContent = mat;
+                material.appendChild(opt);
+            });
+        }
+
+        function actualizarGrosor() {
+            grosor.innerHTML = '<option value="">Seleccione...</option>';
+            let opciones = grosoresPorMaterial[material.value];
+            opciones.forEach(gr => {
+                let opt = document.createElement('option');
+                opt.value = gr;
+                opt.textContent = gr + ' mm';
+                grosor.appendChild(opt);
+            });
+        }
+
+        function actualizarCaras() {
+            if (material.value === 'HPL') {
+                divCaras.classList.remove('hidden');
+                divCarasFijo.classList.add('hidden');
+            } else {
+                divCaras.classList.add('hidden');
+                divCarasFijo.classList.remove('hidden');
+            }
+            divColor.classList.add('hidden');
+        }
+
+        function actualizarColor() {
+            color.innerHTML = '<option value="">Seleccione...</option>';
+            let clave;
+            if (material.value === 'HPL') {
+                clave = `${material.value}_${grosor.value}_${caras.value}`;
+            } else {
+                clave = `${material.value}_${grosor.value}_2`;
+            }
+            (colores[clave] || []).forEach(col => {
+                let opt = document.createElement('option');
+                opt.value = col;
+                opt.textContent = col;
+                color.appendChild(opt);
+            });
+            divColor.classList.remove('hidden');
+        }
+        document.getElementById('color').addEventListener('change', function () {
+  const colorSeleccionado = this.value;
+  const img = document.getElementById('imagenColor');
+
+  if (colorSeleccionado) {
+    const ruta = `colores/${colorSeleccionado.replace(/\s+/g, '_')}.jpg`;
+    img.src = ruta;
+    img.style.display = 'block';
+  } else {
+    img.src = '';
+    img.style.display = 'none';
+  }
+});
+
+        function actualizarMedidas() {
+            medidasCampos.innerHTML = '';
+           medidasCampos.innerHTML = '';
+const formaSeleccionada = document.querySelector('input[name="forma"]:checked');
+const formaValor = formaSeleccionada ? formaSeleccionada.value : '';
+let piezas = [];
+if (['lineal', 'isla'].includes(formaValor)) {
+
+                piezas = ['A'];
+            } else if (formaValor === 'l') {
+                piezas = ['A', 'B'];
+            } else if (formaValor === 'u') {
+                piezas = ['A', 'B', 'C'];
+            } else if (formaValor === 'redonda') {
+                piezas = ['Redonda'];
+            } else if (formaValor === 'cubos') {
+                piezas = ['Cubo 1', 'Cubo 2', 'Cubo 3'];
+            }
+            piezas.forEach(pieza => {
+                let div = document.createElement('div');
+                div.className = 'medida-group';
+                if (pieza === 'Redonda') {
+                    div.innerHTML = `<label>Pieza redonda:</label>
+                        <input type="number" name="radio" placeholder="Medida radio (mm)" min="0" required>`;
+                } else {
+                    let placeholder = (pieza.startsWith('Cubo')) ? "Medida lado (mm)" : "Medida fondo (mm)";
+                    div.innerHTML = `<label>Pieza ${pieza}:</label>
+                        <input type="number" name="largo${pieza}" placeholder="Medida largo (mm)" min="0" required>
+                        <input type="number" name="fondo${pieza}" placeholder="${placeholder}" min="0" required>`;
+                }
+                medidasCampos.appendChild(div);
+            });
+            divMedidas.classList.remove('hidden');
+            actualizarEnsambles();
+        }
+
+        function actualizarEnsambles() {
+            ensamblesOpciones.innerHTML = '';
+            let opciones = ensamblesPorMaterial[material.value];
+            const formaSeleccionada = document.querySelector('input[name="forma"]:checked');
+const formaValor = formaSeleccionada ? formaSeleccionada.value : '';
+let piezas = [];
+if (['lineal', 'isla'].includes(formaValor)) {
+    piezas = ['A'];
+} else if (formaValor === 'l') {
+    piezas = ['A', 'B'];
+} else if (formaValor === 'u') {
+    piezas = ['A', 'B', 'C'];
+} else if (formaValor === 'cubos') {
+    piezas = ['Cubo 1', 'Cubo 2', 'Cubo 3'];
+}
+
+            opciones.forEach(ensamble => {
+                let group = document.createElement('div');
+                group.className = 'ensamble-group';
+                let checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = ensamble;
+                checkbox.id = 'ensamble_' + ensamble.replace(/\s/g, '_');
+                checkbox.name = 'ensamble';
+                let label = document.createElement('label');
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(' ' + ensamble));
+                group.appendChild(label);
+
+                let campos = document.createElement('div');
+                campos.className = 'ensamble-campos hidden';
+                campos.id = 'campos_' + ensamble.replace(/\s/g, '_');
+
+                piezas.forEach(pieza => {
+                    let select = document.createElement('select');
+                    select.name = `ensamble_${ensamble}_${pieza}`;
+                    select.innerHTML = `
+                        <option value="">Seleccione lado para pieza ${pieza}</option>
+                        <option value="derecho">Derecho</option>
+                        <option value="izquierdo">Izquierdo</option>
+                    `;
+                    campos.appendChild(document.createTextNode(`Pieza ${pieza}: `));
+                    campos.appendChild(select);
+                    campos.appendChild(document.createElement('br'));
+                });
+
+                group.appendChild(campos);
+                ensamblesOpciones.appendChild(group);
+
+                checkbox.addEventListener('change', function() {
+                    campos.classList.toggle('hidden', !this.checked);
+                });
+            });
+            divEnsambles.classList.remove('hidden');
+            actualizarTrabajos();
+        }
+
+        function actualizarTrabajos() {
+            trabajosOpciones.innerHTML = '';
+            let opciones = trabajosPorMaterial[material.value];
+            const formaSeleccionada = document.querySelector('input[name="forma"]:checked');
+const formaValor = formaSeleccionada ? formaSeleccionada.value : '';
+let piezas = [];
+if (['lineal', 'isla'].includes(formaValor)) {
+    piezas = ['A'];
+} else if (formaValor === 'l') {
+    piezas = ['A', 'B'];
+} else if (formaValor === 'u') {
+    piezas = ['A', 'B', 'C'];
+} else if (formaValor === 'cubos') {
+    piezas = ['Cubo 1', 'Cubo 2', 'Cubo 3'];
+} else if (formaValor === 'redonda') {
+    piezas = ['Redonda'];
+}
+
+            opciones.forEach(trab => {
+                let group = document.createElement('div');
+                group.className = 'trabajo-group';
+                let checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = trab;
+                checkbox.id = 'trabajo_' + trab.replace(/\s/g, '_');
+                checkbox.name = 'trabajos';
+                let label = document.createElement('label');
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(' ' + trab));
+                group.appendChild(label);
+
+                let campos = document.createElement('div');
+                campos.className = 'trabajo-campos hidden';
+                campos.id = 'campos_trabajo_' + trab.replace(/\s/g, '_');
+
+                piezas.forEach(pieza => {
+                    let select = document.createElement('select');
+                    select.name = `trabajo_${trab}_${pieza}`;
+                    select.innerHTML = `
+                        <option value="">Seleccione lado para pieza ${pieza}</option>
+                        <option value="derecho">Derecho</option>
+                        <option value="izquierdo">Izquierdo</option>
+                    `;
+                    campos.appendChild(document.createTextNode(`Pieza ${pieza}: `));
+                    campos.appendChild(select);
+                    campos.appendChild(document.createElement('br'));
+                });
+
+                // Campos extra para Faldón ingletado (robusto a tildes y mayúsculas)
+                if (/fald[oó]n ingletado/i.test(trab)) {
+                    let extra = document.createElement('div');
+                    extra.innerHTML = `
+                        <label>Metros cuadrados de tapa:
+                            <input type="number" name="faldonTapa" placeholder="Metros cuadrados de tapa" min="0" step="0.01">
+                        </label><br>
+                        <label>Metros lineales vistos:
+                            <input type="number" name="faldonVistos" placeholder="Metros lineales vistos" min="0" step="0.01">
+                        </label><br>
+                        <label>Altura total del faldón (mm):
+                            <input type="number" name="faldonAltura" placeholder="Altura total del faldón (mm)" min="0">
+                        </label>
+                    `;
+                    extra.className = "faldon-campos";
+                    campos.appendChild(extra);
+                }
+
+                group.appendChild(campos);
+                trabajosOpciones.appendChild(group);
+
+                checkbox.addEventListener('change', function() {
+                    campos.classList.toggle('hidden', !this.checked);
+                    // Limpia los campos si se desmarca
+                    if (!this.checked && /fald[oó]n ingletado/i.test(trab)) {
+                        let inputs = campos.querySelectorAll('input[type="number"]');
+                        inputs.forEach(inp => inp.value = '');
+                    }
+                });
+            });
+            divTrabajos.classList.remove('hidden');
+            actualizarEncastres();
+        }
+
+        function actualizarEncastres() {
+            encastresOpciones.innerHTML = '';
+            let opciones = encastresPorMaterial[material.value];
+            const formaSeleccionada = document.querySelector('input[name="forma"]:checked');
+            const formaValor = formaSeleccionada ? formaSeleccionada.value : '';
+            let piezas = [];
+            if (['lineal', 'isla'].includes(formaValor)) {
+                piezas = ['A'];
+            } else if (formaValor === 'l') {
+                piezas = ['A', 'B'];
+            } else if (formaValor === 'u') {
+                piezas = ['A', 'B', 'C'];
+            } else if (formaValor === 'cubos') {
+                piezas = ['Cubo 1', 'Cubo 2', 'Cubo 3'];
+            }
+            opciones.forEach(encastre => {
+                let group = document.createElement('div');
+                group.className = 'encastre-group';
+                let checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = encastre;
+                checkbox.id = 'encastre_' + encastre.replace(/\s/g, '_');
+                checkbox.name = 'encastre';
+                let label = document.createElement('label');
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(' ' + encastre));
+                group.appendChild(label);
+
+                let campos = document.createElement('div');
+                campos.className = 'encastre-campos hidden';
+                campos.id = 'campos_encastre_' + encastre.replace(/\s/g, '_');
+
+                piezas.forEach(pieza => {
+                    let radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `pieza_encastre_${encastre}`;
+                    radio.value = pieza;
+                    campos.appendChild(radio);
+                    campos.appendChild(document.createTextNode(`Pieza ${pieza} `));
+                });
+
+                group.appendChild(campos);
+                encastresOpciones.appendChild(group);
+
+                checkbox.addEventListener('change', function() {
+                    campos.classList.toggle('hidden', !this.checked);
+                });
+            });
+            divEncastres.classList.remove('hidden');
+            actualizarComplementos();
+        }
+
+        function actualizarComplementos() {
+            complementosOpciones.innerHTML = '';
+            let opciones = complementosPorMaterial[material.value];
+            opciones.forEach(complemento => {
+                let div = document.createElement('div');
+                div.className = 'complemento-group';
+
+                let checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'complementos';
+                checkbox.value = complemento;
+
+                let label = document.createElement('label');
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(' ' + complemento));
+                div.appendChild(label);
+                complementosOpciones.appendChild(div);
+            });
+            divComplementos.classList.remove('hidden');
+            btnResumen.style.display = 'inline-block';
+            btnEnviar.style.display = 'inline-block';
+
+            calcularTotal();
+
+            // Recalcular total al modificar medidas
+            document.querySelector('#medidasCampos').addEventListener('input', calcularTotal);
+
+            // Recalcular total al seleccionar/deseleccionar ensambles
+            document.addEventListener('change', function(e) {
+             if (e.target.name === 'ensamble' || e.target.name.startsWith('trabajos')) {
+        calcularTotal();
+    }
+});
+
+        }
+
+        function hideFrom(campo) {
+            if (campo === 'forma') {
+                divForma.classList.add('hidden');
+                divMaterial.classList.add('hidden');
+                divGrosor.classList.add('hidden');
+                divCaras.classList.add('hidden');
+                divCarasFijo.classList.add('hidden');
+                divColor.classList.add('hidden');
+                divMedidas.classList.add('hidden');
+                divEnsambles.classList.add('hidden');
+                divTrabajos.classList.add('hidden');
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'medidas') {
+                divMedidas.classList.add('hidden');
+                divEnsambles.classList.add('hidden');
+                divTrabajos.classList.add('hidden');
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'material') {
+                divMaterial.classList.add('hidden');
+                divGrosor.classList.add('hidden');
+                divCaras.classList.add('hidden');
+                divCarasFijo.classList.add('hidden');
+                divColor.classList.add('hidden');
+                divMedidas.classList.add('hidden');
+                divEnsambles.classList.add('hidden');
+                divTrabajos.classList.add('hidden');
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'grosor') {
+                divGrosor.classList.add('hidden');
+                divCaras.classList.add('hidden');
+                divCarasFijo.classList.add('hidden');
+                divColor.classList.add('hidden');
+                divMedidas.classList.add('hidden');
+                divEnsambles.classList.add('hidden');
+                divTrabajos.classList.add('hidden');
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'caras') {
+                divCaras.classList.add('hidden');
+                divCarasFijo.classList.add('hidden');
+                divColor.classList.add('hidden');
+                divMedidas.classList.add('hidden');
+                divEnsambles.classList.add('hidden');
+                divTrabajos.classList.add('hidden');
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'color') {
+                divColor.classList.add('hidden');
+                divMedidas.classList.add('hidden');
+                divEnsambles.classList.add('hidden');
+                divTrabajos.classList.add('hidden');
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'ensamble') {
+                divMedidas.classList.add('hidden');
+                divEnsambles.classList.add('hidden');
+                divTrabajos.classList.add('hidden');
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'trabajos') {
+                divTrabajos.classList.add('hidden');
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'encastre') {
+                divEncastres.classList.add('hidden');
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+            if (campo === 'complementos') {
+                divComplementos.classList.add('hidden');
+                btnResumen.style.display = 'none';
+                btnEnviar.style.display = 'none';
+            }
+        }
+
+        // --- RESUMEN MEJORADO ---
+
+btnEnviar.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    // Limpiar mensaje previo
+    let mensajeError = document.getElementById('mensajeErrorValidacion');
+    if (mensajeError) mensajeError.remove();
+
+    // Validar ensambles
+    const ensamblesSeleccionados = document.querySelectorAll('input[name="ensamble"]:checked');
+    if (ensamblesSeleccionados.length === 0) {
+        mostrarError("Debes seleccionar al menos un tipo de ensamble.");
+        return;
+    }
+
+    // Validar medidas
+    const medidasCampos = document.querySelectorAll('#medidasCampos input[type="number"]');
+    let medidasIncompletas = false;
+    medidasCampos.forEach(input => {
+        input.style.border = '';
+        if (!input.value || parseFloat(input.value) <= 0) {
+            medidasIncompletas = true;
+            input.style.border = '2px solid red';
+        }
+    });
+
+    if (medidasIncompletas) {
+        mostrarError("Completa todas las medidas con valores mayores a 30 mm.");
+        return;
+    }
+
+    // Si pasa todo, mostrar formulario de contacto
+    document.getElementById('formContacto').classList.remove('hidden');
+});
+
+// Función para mostrar error
+function mostrarError(texto) {
+    const div = document.createElement('div');
+    div.id = 'mensajeErrorValidacion';
+    div.style.color = 'red';
+    div.style.marginTop = '15px';
+    div.style.fontWeight = 'bold';
+    div.textContent = texto;
+
+    const formulario = document.getElementById('formulario');
+    formulario.parentNode.insertBefore(div, formulario.nextSibling);
+}
+
+
+document.getElementById('btnFinalizar').addEventListener('click', function() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    if (!nombre || !telefono || !email) {
+        alert("Por favor completa todos los campos obligatorios.");
+        return;
+    }
+
+    const resumenHtml = document.getElementById('resumen').innerHTML;
+    document.getElementById('mensajeFinal').classList.remove('hidden');
+    document.getElementById('mensajeFinal').innerHTML =
+        "<p>¡Gracias! Hemos recibido tu solicitud. Pronto nos pondremos en contacto contigo.</p>" +
+        "<h4>Resumen de tu selección:</h4>" + resumenHtml;
+
+    document.getElementById('formContacto').classList.add('hidden');
+});
+
+        btnResumen.addEventListener('click', function() {
+            mostrarResumen();
+        });
+
+        document.getElementById('formulario').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // 1. Validar al menos un ensamble seleccionado
+    const ensamblesSeleccionados = document.querySelectorAll('input[name="ensamble"]:checked');
+    if (ensamblesSeleccionados.length === 0) {
+        alert('Por favor selecciona al menos un tipo de ensamble.');
+        return;
+    }
+
+    // 2. Validar medidas
+    const medidasCampos = document.querySelectorAll('#medidasCampos input[type="number"]');
+    let medidasIncompletas = false;
+    medidasCampos.forEach(input => {
+        input.style.border = ''; // limpia estilos anteriores
+        if (!input.value || parseFloat(input.value) <= 0) {
+            medidasIncompletas = true;
+            input.style.border = '2px solid red';
+        }
+    });
+
+    if (medidasIncompletas) {
+        alert('Por favor completa todas las medidas con valores mayores a 0.');
+        return;
+    }
+
+    // Si todo está bien, mostrar mensaje
+    const resumen = document.getElementById('resumen');
+    const mensajeEnviado = document.getElementById('mensajeEnviado');
+
+    resumen.classList.add('hidden');
+    mensajeEnviado.classList.remove('hidden');
+    mensajeEnviado.innerHTML = `<strong>Gracias por solicitar tu presupuesto. Nuestro equipo técnico lo revisará y se lo remitirá valorado en menos de 24h. Gracias por confiar en KÜÜK SURFACES SL.</strong>`;
+});
+
+
+
+        function mostrarResumen() {
+            const form = document.getElementById('formulario');
+            let html = '';
+
+            html += `<div class="resumen-section"><strong>Tipo de producto:</strong> ${form.tipo.value ? form.tipo.options[form.tipo.selectedIndex].text : ''}</div>`;
+            const formaSeleccionada = document.querySelector('input[name="forma"]:checked');
+            const formaTexto = formaSeleccionada ? formaSeleccionada.title : '';
+                html += `<div class="resumen-section"><strong>Forma:</strong> ${formaTexto}</div>`;
+
+
+            html += `<div class="resumen-section"><strong>Material:</strong> ${form.material.value ? form.material.options[form.material.selectedIndex].text : ''}</div>`;
+            html += `<div class="resumen-section"><strong>Grosor:</strong> ${form.grosor.value ? form.grosor.options[form.grosor.selectedIndex].text : ''}</div>`;
+            if (form.material.value === 'HPL') {
+                html += `<div class="resumen-section"><strong>Caras:</strong> ${form.caras.value ? form.caras.options[form.caras.selectedIndex].text : ''}</div>`;
+            } else {
+                html += `<div class="resumen-section"><strong>Caras:</strong> 2 caras</div>`;
+            }
+            html += `<div class="resumen-section"><strong>Color:</strong> ${form.color.value ? form.color.options[form.color.selectedIndex].text : ''}</div>`;
+
+            html += `<div class="resumen-section"><strong>Medidas de las piezas:</strong><ul>`;
+            const medidas = form.querySelectorAll('.medida-group');
+            medidas.forEach(grupo => {
+                let label = grupo.querySelector('label').textContent;
+                let inputs = grupo.querySelectorAll('input');
+                let valores = [];
+                inputs.forEach(inp => {
+                    if (inp.value) valores.push(inp.placeholder.replace('Medida ', '') + ': ' + inp.value + ' mm');
+                });
+                if (valores.length) {
+                    html += `<li>${label} ${valores.join(', ')}</li>`;
+                }
+            });
+            html += `</ul></div>`;
+
+            // Ensambles
+            const ensamblesMarcados = form.querySelectorAll('input[name="ensamble"]:checked');
+            if (ensamblesMarcados.length) {
+                html += `<div class="resumen-section"><strong>Tipo de ensamble:</strong><ul>`;
+                ensamblesMarcados.forEach(cb => {
+                    html += `<li>${cb.value}`;
+                    const campos = document.getElementById('campos_' + cb.value.replace(/\s/g, '_'));
+                    if (campos) {
+                        let selects = campos.querySelectorAll('select');
+                        selects.forEach(sel => {
+                            if (sel.value) {
+                                let pieza = sel.name.split('_').pop();
+                                html += `<br>&nbsp;&nbsp;Pieza ${pieza}: ${sel.options[sel.selectedIndex].text}`;
+                            }
+                        });
+                    }
+                    html += `</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Trabajos a realizar
+            const trabajosMarcados = form.querySelectorAll('input[name="trabajos"]:checked');
+            if (trabajosMarcados.length) {
+                html += `<div class="resumen-section"><strong>Trabajos a realizar:</strong><ul>`;
+                trabajosMarcados.forEach(cb => {
+                    html += `<li>${cb.value}`;
+                    const campos = document.getElementById('campos_trabajo_' + cb.value.replace(/\s/g, '_'));
+                    if (campos) {
+                        let selects = campos.querySelectorAll('select');
+                        selects.forEach(sel => {
+                            if (sel.value) {
+                                let pieza = sel.name.split('_').pop();
+                                html += `<br>&nbsp;&nbsp;Pieza ${pieza}: ${sel.options[sel.selectedIndex].text}`;
+                            }
+                        });
+                        if (/fald[oó]n ingletado/i.test(cb.value)) {
+                            let tapa = campos.querySelector('input[name="faldonTapa"]');
+                            let vistos = campos.querySelector('input[name="faldonVistos"]');
+                            let altura = campos.querySelector('input[name="faldonAltura"]');
+                            if ((tapa && tapa.value) || (vistos && vistos.value) || (altura && altura.value)) {
+                                html += `<ul>`;
+                                if (tapa && tapa.value) html += `<li>Metros cuadrados de tapa: ${tapa.value}</li>`;
+                                if (vistos && vistos.value) html += `<li>Metros lineales vistos: ${vistos.value}</li>`;
+                                if (altura && altura.value) html += `<li>Altura total del faldón (mm): ${altura.value}</li>`;
+                                html += `</ul>`;
+                            }
+                        }
+                    }
+                    html += `</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Encastres
+            const encastresMarcados = form.querySelectorAll('input[name="encastre"]:checked');
+            if (encastresMarcados.length) {
+                html += `<div class="resumen-section"><strong>Encastres:</strong><ul>`;
+                encastresMarcados.forEach(cb => {
+                    html += `<li>${cb.value}`;
+                    const campos = document.getElementById('campos_encastre_' + cb.value.replace(/\s/g, '_'));
+                    if (campos) {
+                        let piezaRadio = campos.querySelector('input[type="radio"]:checked');
+                        if (piezaRadio) {
+                            html += `<br>&nbsp;&nbsp;Pieza: ${piezaRadio.value}`;
+                        }
+                    }
+                    html += `</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Complementos
+            const complementosMarcados = form.querySelectorAll('input[name="complementos"]:checked');
+            if (complementosMarcados.length) {
+                html += `<div class="resumen-section"><strong>Complementos:</strong><ul>`;
+                complementosMarcados.forEach(cb => {
+                    html += `<li>${cb.value}</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            resumen.innerHTML = html;
+            resumen.classList.remove('hidden');
+            mensajeEnviado.classList.add('hidden');
+        }
+        
+function calcularTotal() {
+    let total = 0;
+
+    const material = document.getElementById("material").value;
+    const grosor = document.getElementById("grosor").value;
+    const color = document.getElementById("color")?.value.toLowerCase() || '';
+    const caras = document.getElementById("caras")?.value || '2';
+
+    // Área total
+    let areaTotal = 0;
+    const medidas = document.querySelectorAll('#medidasCampos input');
+    let largo = null;
+
+    medidas.forEach(input => {
+        const val = parseFloat(input.value);
+        if (!val || val <= 0) return;
+
+        if (input.name.includes("largo")) {
+            largo = val;
+        } else if (input.name.includes("fondo") && largo !== null) {
+            areaTotal += (largo * val) / 1_000_000;
+            largo = null;
+        } else if (input.name === "radio") {
+            areaTotal += Math.PI * Math.pow(val, 2) / 1_000_000;
+        }
+    });
+
+    let precio_m2 = 0;
+    if (material === 'HPL') {
+        const key = `${grosor}_${caras}`;
+        precio_m2 = precios.materiales.HPL[key] || 0;
+    } else if (material === 'Compacto') {
+        precio_m2 = (color === 'negro') ? 520 : 950;
+    } else {
+        precio_m2 = precios.materiales[material] || 0;
+    }
+    total += precio_m2 * areaTotal;
+
+    document.querySelectorAll('input[name="ensamble"]:checked').forEach(cb => {
+        total += precios.ensambles[cb.value] || 0;
+    });
+
+    document.querySelectorAll('input[name="trabajos"]:checked').forEach(cb => {
+        total += precios.trabajos[cb.value] || 0;
+    });
+
+    document.querySelectorAll('input[name="complementos"]:checked').forEach(cb => {
+        if (precios.complementos[material] && precios.complementos[material][cb.value]) {
+            total += precios.complementos[material][cb.value];
+        }
+    });
+
+    document.querySelectorAll('input[name="encastre"]:checked').forEach(cb => {
+        total += precios.encastres[cb.value] || 0;
+    });
+
+    // Convertir puntos a euros
+    document.getElementById('total').textContent = `${(total * 0.34).toFixed(2)} €`;
+
+    document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('input', calcularTotal);
+  el.addEventListener('change', calcularTotal);
+});
+
+}
+
+
+    });
+</script>
+
+<!-- Formulario adicional emergente -->
+<div id="formContacto" class="hidden" style="margin-top: 30px;">
+    <h3>Datos de contacto</h3>
+    <label>Nombre:</label>
+    <input type="text" id="nombre" required>
+
+    <label>Teléfono:</label>
+    <input type="text" id="telefono" required>
+
+    <label>Correo electrónico:</label>
+    <br>
+    <input type="email" id="email" required>
+</br>
+
+    <label>Comentario adicional:</label>
+    <textarea id="comentario" rows="4" style="width: 100%;"></textarea>
+
+    <button id="btnFinalizar">Finalizar envío</button>
+</div>
+
+<div id="mensajeFinal" class="hidden" style="margin-top: 20px; font-weight: bold; color: green;"></div>
+
+<script>const ajaxurl = "/wp-admin/admin-ajax.php";</script>
+<script>
+document.getElementById('btnFinalizar').addEventListener('click', function () {
+    const nombre = document.getElementById('nombre').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const comentario = document.getElementById('comentario').value.trim();
+    const resumenHtml = document.getElementById('resumen').innerHTML;
+
+    if (!nombre || !telefono || !email) {
+        alert("Por favor completa todos los campos obligatorios.");
+        return;
+    }
+
+    const data = new FormData();
+    data.append('action', 'enviar_resumen_presupuesto');
+    data.append('nombre', nombre);
+    data.append('telefono', telefono);
+    data.append('email', email);
+    data.append('comentario', comentario);
+    data.append('resumen', resumenHtml);
+
+    fetch(ajaxurl, {
+        method: 'POST',
+        body: data
+    })
+    .then(res => res.json())
+    .then(res => {
+        if (res.status === 'ok') {
+            document.getElementById('formContacto').classList.add('hidden');
+            document.getElementById('mensajeFinal').classList.remove('hidden');
+            document.getElementById('mensajeFinal').innerHTML =
+                "<p>¡Gracias! Hemos recibido tu solicitud. Te responderemos por correo pronto.</p><h4>Resumen de tu selección:</h4>" + resumenHtml;
+        } else {
+            alert("Error al enviar el correo. Inténtalo más tarde.");
+        }
+    });
+});
+</script>
+
+</body>
+</html>
