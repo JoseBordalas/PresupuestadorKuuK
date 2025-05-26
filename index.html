@@ -1434,21 +1434,31 @@ document.getElementById('btnFinalizar').addEventListener('click', function () {
     data.append('comentario', comentario);
     data.append('resumen', resumenHtml);
 
-    fetch(ajaxurl, {
-        method: 'POST',
-        body: data
-    })
-    .then(res => res.json())
-    .then(res => {
-        if (res.status === 'ok') {
-            document.getElementById('formContacto').classList.add('hidden');
-            document.getElementById('mensajeFinal').classList.remove('hidden');
-            document.getElementById('mensajeFinal').innerHTML =
-                "<p>¡Gracias! Hemos recibido tu solicitud. Te responderemos por correo pronto.</p><h4>Resumen de tu selección:</h4>" + resumenHtml;
-        } else {
-            alert("Error al enviar el correo. Inténtalo más tarde.");
-        }
-    });
+   fetch("https://script.google.com/macros/s/AKfycbzuQUXpq422XIsnX44flPdLNf7An5KQgL1BNZSUSe04HI2Mgmy_4TytsXvXl3jLskAD/exec", {
+  method: "POST",
+  body: JSON.stringify({
+    nombre,
+    telefono,
+    email,
+    comentario,
+    resumen: resumenHtml
+  }),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(res => res.json())
+.then(res => {
+  if (res.status === "ok") {
+    document.getElementById('formContacto').classList.add('hidden');
+    document.getElementById('mensajeFinal').classList.remove('hidden');
+    document.getElementById('mensajeFinal').innerHTML =
+      "<p>¡Gracias! Hemos recibido tu solicitud. Te responderemos por correo pronto.</p><h4>Resumen de tu selección:</h4>" + resumenHtml;
+  } else {
+    alert("Error al enviar. Intenta más tarde.");
+  }
+});
+
 });
 </script>
 
